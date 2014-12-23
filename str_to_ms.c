@@ -1,12 +1,18 @@
 #include "common.h"
 #include <stdlib.h>
 
+static _Bool init_done=0;
+
 void str_to_ms_init(ms_state_t *st)
 {
-	st->ms=malloc(st->Ceilings*sizeof(int));
-	if(st->ms==NULL){
-		error("failed to malloc ms\n");
-		exit(EXIT_FAILURE);
+	if(!init_done){
+		st->ms=malloc(st->Ceilings*sizeof(int));
+		if(st->ms==NULL){
+			error("failed to malloc ms\n");
+			exit(EXIT_FAILURE);
+		}
+
+		init_done=!0;
 	}
 
 	return;
