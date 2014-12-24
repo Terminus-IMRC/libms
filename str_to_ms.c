@@ -1,7 +1,7 @@
 #include "common.h"
 #include <stdlib.h>
 
-static _Bool init_done=0;
+static _Bool init_done=0, finalize_done=0;
 
 void str_to_ms_init(ms_state_t *st)
 {
@@ -20,7 +20,11 @@ void str_to_ms_init(ms_state_t *st)
 
 void str_to_ms_finalize(ms_state_t *st)
 {
-	free(st->ms);
+	if(!finalize_done){
+		free(st->ms);
+
+		finalize_done=!0;
+	}
 
 	return;
 }
