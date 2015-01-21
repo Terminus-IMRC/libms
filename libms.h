@@ -28,5 +28,7 @@
 #define ms_X(stp) ((((stp))->X))
 #define ms_Ceilings(stp) ((((stp))->Ceilings))
 #define ms_OneLine(stp) ((((stp))->OneLine))
+#define ms_Xm2(stp) ((((stp))->Xm2))
+#define ms_Xm2p2(stp) ((((stp))->Xm2p2))
 
 #endif /* __LIBMS_H_INCLUDED__ */
