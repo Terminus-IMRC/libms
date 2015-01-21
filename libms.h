@@ -25,4 +25,8 @@
 	void ms_state_print_info(ms_state_t *st);
 	void output_ms(int *ms, FILE *fp, ms_state_t *st);
 
+#define ms_X(stp) ((((stp))->X))
+#define ms_Ceilings(stp) ((((stp))->Ceilings))
+#define ms_OneLine(stp) ((((stp))->OneLine))
+
 #endif /* __LIBMS_H_INCLUDED__ */
