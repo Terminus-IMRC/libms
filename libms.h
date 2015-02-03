@@ -24,6 +24,8 @@
 	int* str_to_ms(char *s, ms_state_t *st);
 	void ms_state_print_info(ms_state_t *st);
 	void output_ms(int *ms, FILE *fp, ms_state_t *st);
+	int* ms_alloc(ms_state_t *st);
+	void ms_free(int *ms, ms_state_t *st);
 
 #define ms_X(stp) ((((stp))->X))
 #define ms_Ceilings(stp) ((((stp))->Ceilings))

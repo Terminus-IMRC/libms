@@ -12,5 +12,7 @@
 	void ms_state_print_info_finalize(ms_state_t *st);
 	void output_ms_init(ms_state_t *st);
 	void output_ms_finalize(ms_state_t *st);
+	void ms_mem_basics_init(ms_state_t *st);
+	void ms_mem_basics_finalize(ms_state_t *st);
 
 #endif /* __COMMON_H_INCLUDED__ */

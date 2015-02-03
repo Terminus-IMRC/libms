@@ -19,6 +19,7 @@ void ms_init(int X, ms_origin_t org, ms_state_t *st)
 	str_to_ms_init(st);
 	ms_state_print_info_init(st);
 	output_ms_init(st);
+	ms_mem_basics_init(st);
 
 	return;
 }
@@ -29,6 +30,7 @@ void ms_finalize(ms_state_t *st)
 	str_to_ms_finalize(st);
 	ms_state_print_info_finalize(st);
 	output_ms_finalize(st);
+	ms_mem_basics_finalize(st);
 
 	return;
 }
