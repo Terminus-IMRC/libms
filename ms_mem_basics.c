@@ -11,6 +11,8 @@ void ms_mem_basics_init(ms_state_t *st)
 
 void ms_mem_basics_finalize(ms_state_t *st)
 {
+	ms_free(st->move_ms, st);
+
 	return;
 }
 
