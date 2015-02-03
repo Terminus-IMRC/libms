@@ -9,6 +9,7 @@
 		int Xm2, Xm2p2;
 		int *sums;
 		int *ms;
+		int *move_ms;
 	} ms_state_t;
 
 	typedef enum{
@@ -27,6 +28,7 @@
 	void output_ms(int *ms, FILE *fp, ms_state_t *st);
 	int* ms_alloc(ms_state_t *st);
 	void ms_free(int *ms, ms_state_t *st);
+	void ms_move(int *ms_dst, int *ms_src, ms_state_t *st);
 
 #define ms_X(stp) ((((stp))->X))
 #define ms_Ceilings(stp) ((((stp))->Ceilings))
