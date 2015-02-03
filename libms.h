@@ -2,6 +2,7 @@
 #define __LIBMS_H_INCLUDED__
 
 #include <stdio.h>
+#include <string.h>
 
 	typedef struct{
 		int X, Ceilings, OneLine;
@@ -32,5 +33,7 @@
 #define ms_OneLine(stp) ((((stp))->OneLine))
 #define ms_Xm2(stp) ((((stp))->Xm2))
 #define ms_Xm2p2(stp) ((((stp))->Xm2p2))
+
+#define ms_cp(ms_dst, ms_src, stp) (((void)memcpy(((ms_dst)), ((ms_src)), ((stp))->Ceilings*sizeof(int))))
 
 #endif /* __LIBMS_H_INCLUDED__ */
