@@ -1,5 +1,6 @@
 #include "common.h"
 #include <stdlib.h>
+#include <stdarg.h>
 
 void ms_mem_basics_init(ms_state_t *st)
 {
@@ -37,6 +38,20 @@ void ms_move(int *ms_dst, int *ms_src, ms_state_t *st)
 {
 	ms_cp(st->move_ms, ms_src, st);
 	ms_cp(ms_dst, st->move_ms, st);
+
+	return;
+}
+
+/* Actually this argument order is irregular, but it cannot be helped since C89 does not have va_copy nor __va_copy */
+void ms_subst(int *ms, ms_state_t *st, ...)
+{
+	int i;
+	va_list ap;
+
+	va_start(ap, st);
+	for(i=0; i<st->Ceilings; i++)
+		ms[i]=va_arg(ap, int);
+	va_end(ap);
 
 	return;
 }
