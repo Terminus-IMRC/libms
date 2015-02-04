@@ -12,6 +12,10 @@ void output_ms_init(ms_state_t *st)
 
 void output_ms_finalize(ms_state_t *st)
 {
+	if(st->is_output_ms_finalize_called)
+		return;
+	st->is_output_ms_finalize_called=!0;
+
 	return;
 }
 

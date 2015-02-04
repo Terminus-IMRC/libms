@@ -22,6 +22,7 @@ void ms_init(int X, ms_origin_t org, ms_state_t *st)
 	st->is_ms_state_print_info_init_called=0;
 	st->is_ms_state_print_info_finalize_called=0;
 	st->is_output_ms_init_called=0;
+	st->is_output_ms_finalize_called=0;
 
 	is_ms_init(st);
 	str_to_ms_init(st);
