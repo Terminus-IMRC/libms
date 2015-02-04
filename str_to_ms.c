@@ -3,6 +3,10 @@
 
 void str_to_ms_init(ms_state_t *st)
 {
+	if(st->is_str_to_ms_init_called)
+		return;
+	st->is_str_to_ms_init_called=!0;
+
 	return;
 }
 
