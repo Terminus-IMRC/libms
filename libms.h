@@ -8,7 +8,7 @@
 		int X, Ceilings, OneLine;
 		int Xm2, Xm2p2;
 		int *sums;
-		int *move_ms;
+		int *ms_tmp;
 	} ms_state_t;
 
 	typedef enum{

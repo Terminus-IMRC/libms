@@ -4,14 +4,14 @@
 
 void ms_mem_basics_init(ms_state_t *st)
 {
-	st->move_ms=ms_alloc(st);
+	st->ms_tmp=ms_alloc(st);
 
 	return;
 }
 
 void ms_mem_basics_finalize(ms_state_t *st)
 {
-	ms_free(st->move_ms, st);
+	ms_free(st->ms_tmp, st);
 
 	return;
 }
@@ -38,8 +38,8 @@ void ms_free(int *ms, ms_state_t *st)
 
 void ms_move(int *ms_dst, int *ms_src, ms_state_t *st)
 {
-	ms_cp(st->move_ms, ms_src, st);
-	ms_cp(ms_dst, st->move_ms, st);
+	ms_cp(st->ms_tmp, ms_src, st);
+	ms_cp(ms_dst, st->ms_tmp, st);
 
 	return;
 }
