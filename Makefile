@@ -16,7 +16,7 @@ libms.a: $(OBJS) $(ALLDEPS)
 	$(AR) $(ARFLAGS) $@ $(OBJS)
 	$(RANLIB) $@
 
-%.c.o: %.c
+%.c.o: %.c $(ALLDEPS)
 	$(COMPILE.c) $(OUTPUT_OPTION) $<
 
 .PHONY: clean
