@@ -3,6 +3,10 @@
 
 void output_ms_init(ms_state_t *st)
 {
+	if(st->is_output_ms_init_called)
+		return;
+	st->is_output_ms_init_called=!0;
+
 	return;
 }
 
