@@ -14,7 +14,7 @@
 		_Bool is_str_to_ms_init_called, is_str_to_ms_finalize_called;
 		_Bool is_ms_state_print_info_init_called, is_ms_state_print_info_finalize_called;
 		_Bool is_output_ms_init_called, is_output_ms_finalize_called;
-		_Bool is_ms_mem_basics_init_called;
+		_Bool is_ms_mem_basics_init_called, is_ms_mem_basics_finalize_called;
 	} ms_state_t;
 
 	typedef enum{
