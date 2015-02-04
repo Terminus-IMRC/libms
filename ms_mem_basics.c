@@ -4,6 +4,10 @@
 
 void ms_mem_basics_init(ms_state_t *st)
 {
+	if(st->is_ms_mem_basics_init_called)
+		return;
+	st->is_ms_mem_basics_init_called=!0;
+
 	st->ms_tmp=ms_alloc(st);
 
 	return;
