@@ -12,6 +12,10 @@ void ms_state_print_info_init(ms_state_t *st)
 
 void ms_state_print_info_finalize(ms_state_t *st)
 {
+	if(st->is_ms_state_print_info_finalize_called)
+		return;
+	st->is_ms_state_print_info_finalize_called=!0;
+
 	return;
 }
 
