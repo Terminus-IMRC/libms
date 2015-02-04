@@ -15,6 +15,8 @@ void ms_init(int X, ms_origin_t org, ms_state_t *st)
 		st->OneLine=st->X*(st->Ceilings+1)/2;
 	}
 
+	st->is_is_ms_init_called=0;
+
 	is_ms_init(st);
 	str_to_ms_init(st);
 	ms_state_print_info_init(st);

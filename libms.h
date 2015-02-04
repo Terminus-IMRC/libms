@@ -9,6 +9,8 @@
 		int Xm2, Xm2p2;
 		int *sums;
 		int *ms_tmp;
+
+		_Bool is_is_ms_init_called;
 	} ms_state_t;
 
 	typedef enum{

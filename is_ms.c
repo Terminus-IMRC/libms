@@ -4,6 +4,10 @@
 
 void is_ms_init(ms_state_t *st)
 {
+	if(st->is_is_ms_init_called)
+		return;
+	st->is_is_ms_init_called=!0;
+
 	st->sums=malloc(st->Xm2p2*sizeof(int));
 	if(st->sums==NULL){
 		error("failed to malloc sums\n");
