@@ -10,8 +10,7 @@
 		int *sums;
 		int *ms_tmp;
 
-		_Bool is_is_ms_init_called;
-		_Bool is_is_ms_finalize_called;
+		_Bool is_is_ms_init_called, is_is_ms_finalize_called;
 	} ms_state_t;
 
 	typedef enum{
