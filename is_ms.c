@@ -19,6 +19,10 @@ void is_ms_init(ms_state_t *st)
 
 void is_ms_finalize(ms_state_t *st)
 {
+	if(st->is_is_ms_finalize_called)
+		return;
+	st->is_is_ms_finalize_called=!0;
+
 	free(st->sums);
 
 	return;
