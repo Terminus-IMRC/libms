@@ -3,6 +3,10 @@
 
 void ms_state_print_info_init(ms_state_t *st)
 {
+	if(st->is_ms_state_print_info_init_called)
+		return;
+	st->is_ms_state_print_info_init_called=!0;
+
 	return;
 }
 
