@@ -14,5 +14,7 @@
 	void output_ms_finalize(ms_state_t *st);
 	void ms_mem_basics_init(ms_state_t *st);
 	void ms_mem_basics_finalize(ms_state_t *st);
+	void ms_rotate_init(ms_state_t *st);
+	void ms_rotate_finalize(ms_state_t *st);
 
 #endif /* __COMMON_H_INCLUDED__ */
