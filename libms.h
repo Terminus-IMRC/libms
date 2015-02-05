@@ -52,6 +52,6 @@
 #define ms_Xm2(stp) ((((stp))->Xm2))
 #define ms_Xm2p2(stp) ((((stp))->Xm2p2))
 
-#define ms_cp(ms_dst, ms_src, stp) (((void)memcpy(((ms_dst)), ((ms_src)), ((stp))->Ceilings*sizeof(int))))
+#define ms_cp(ms_dst, ms_src, stp) (((void)memcpy(((ms_dst)), ((ms_src)), ms_Ceilings((stp))*sizeof(int))))
 
 #endif /* __LIBMS_H_INCLUDED__ */
