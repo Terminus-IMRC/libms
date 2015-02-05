@@ -33,33 +33,33 @@ void ms_rotate(int *ms, ms_rotate_t rcond, ms_state_t *st)
 
 		case MS_ROTATE_R:
 		case MS_ROTATE_3L:
-			for(i=0; i<st->X; i++)
-				for(j=0; j<st->X; j++)
-					st->ms_tmp[j*st->X+(st->X-i-1)]=ms[i*st->X+j];
-			ms_cp(ms, st->ms_tmp, st);
+			for(i=0; i<ms_X(st); i++)
+				for(j=0; j<ms_X(st); j++)
+					ms_ms_tmp(st)[j*ms_X(st)+(ms_X(st)-i-1)]=ms[i*ms_X(st)+j];
+			ms_cp(ms, ms_ms_tmp(st), st);
 			break;
 
 		case MS_ROTATE_2R:
 		case MS_ROTATE_2L:
-			for(i=0; i<st->X; i++)
-				for(j=0; j<st->X; j++)
-					st->ms_tmp[(st->X-i-1)*st->X+(st->X-j-1)]=ms[i*st->X+j];
-			ms_cp(ms, st->ms_tmp, st);
+			for(i=0; i<ms_X(st); i++)
+				for(j=0; j<ms_X(st); j++)
+					ms_ms_tmp(st)[(ms_X(st)-i-1)*ms_X(st)+(ms_X(st)-j-1)]=ms[i*ms_X(st)+j];
+			ms_cp(ms, ms_ms_tmp(st), st);
 			break;
 
 		case MS_ROTATE_L:
 		case MS_ROTATE_3R:
-			for(i=0; i<st->X; i++)
-				for(j=0; j<st->X; j++)
-					st->ms_tmp[(st->X-j-1)*st->X+i]=ms[i*st->X+j];
-			ms_cp(ms, st->ms_tmp, st);
+			for(i=0; i<ms_X(st); i++)
+				for(j=0; j<ms_X(st); j++)
+					ms_ms_tmp(st)[(ms_X(st)-j-1)*ms_X(st)+i]=ms[i*ms_X(st)+j];
+			ms_cp(ms, ms_ms_tmp(st), st);
 			break;
 
 		case MS_ROTATE_REV:
-			for(i=0; i<st->X; i++)
-				for(j=0; j<st->X; j++)
-					st->ms_tmp[i*st->X+(st->X-j-1)]=ms[i*st->X+j];
-			ms_cp(ms, st->ms_tmp, st);
+			for(i=0; i<ms_X(st); i++)
+				for(j=0; j<ms_X(st); j++)
+					ms_ms_tmp(st)[i*ms_X(st)+(ms_X(st)-j-1)]=ms[i*ms_X(st)+j];
+			ms_cp(ms, ms_ms_tmp(st), st);
 			break;
 
 		default:
