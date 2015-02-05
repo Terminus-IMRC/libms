@@ -21,10 +21,10 @@ void ms_state_print_info_finalize(ms_state_t *st)
 
 void ms_state_print_info(ms_state_t *st)
 {
-	printf("X: %d\n", st->X);
-	printf("Ceilings: %d\n", st->Ceilings);
-	printf("OneLine: %d\n", st->OneLine);
-	printf("sums: %p\n", st->sums);
+	printf("X: %d\n", ms_X(st));
+	printf("Ceilings: %d\n", ms_Ceilings(st));
+	printf("OneLine: %d\n", ms_OneLine(st));
+	printf("sums: %p\n", ms_sums(st));
 
 	return;
 }
