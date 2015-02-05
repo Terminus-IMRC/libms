@@ -23,7 +23,7 @@ void str_to_ms(int *ms, char *s, ms_state_t *st)
 {
 	int i;
 
-	for(i=0; i<st->Ceilings; i++)
+	for(i=0; i<ms_Ceilings(st); i++)
 		ms[i]=(int)strtol(s, &s, 10);
 	
 	return;
