@@ -23,8 +23,8 @@ void output_ms(int *ms, FILE *fp, ms_state_t *st)
 {
 	int i;
 
-	for(i=0; i<st->Ceilings; i++)
-		fprintf(fp, "%d%c", ms[i], i!=st->Ceilings-1?' ':'\n');
+	for(i=0; i<ms_Ceilings(st); i++)
+		fprintf(fp, "%d%c", ms[i], i!=ms_Ceilings(st)-1?' ':'\n');
 
 	return;
 }
