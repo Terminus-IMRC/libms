@@ -8,8 +8,8 @@ void is_ms_init(ms_state_t *st)
 		return;
 	st->is_is_ms_init_called=!0;
 
-	st->sums=malloc(st->Xm2p2*sizeof(int));
-	if(st->sums==NULL){
+	ms_sums(st)=malloc(ms_Xm2p2(st)*sizeof(int));
+	if(ms_sums(st)==NULL){
 		error("failed to malloc sums\n");
 		exit(EXIT_FAILURE);
 	}
@@ -23,7 +23,7 @@ void is_ms_finalize(ms_state_t *st)
 		return;
 	st->is_is_ms_finalize_called=!0;
 
-	free(st->sums);
+	free(ms_sums(st));
 
 	return;
 }
@@ -32,18 +32,18 @@ ms_bool_t is_ms(int *ms, ms_state_t *st)
 {
 	int i, j;
 
-	memset(st->sums, 0, st->Xm2p2*sizeof(int));
-	for(i=0; i<st->X; i++){
-		for(j=0; j<st->X; j++){
-			st->sums[j]+=ms[j*st->X+i];
-			st->sums[1*st->X+j]+=ms[j+i*st->X];
+	memset(ms_sums(st), 0, ms_Xm2p2(st)*sizeof(int));
+	for(i=0; i<ms_X(st); i++){
+		for(j=0; j<ms_X(st); j++){
+			ms_sums(st)[j]+=ms[j*ms_X(st)+i];
+			ms_sums(st)[1*ms_X(st)+j]+=ms[j+i*ms_X(st)];
 		}
-		st->sums[st->Xm2+0]+=ms[i+i*st->X];
-		st->sums[st->Xm2+1]+=ms[(st->X-1-i)+i*st->X];
+		ms_sums(st)[ms_Xm2(st)+0]+=ms[i+i*ms_X(st)];
+		ms_sums(st)[ms_Xm2(st)+1]+=ms[(ms_X(st)-1-i)+i*ms_X(st)];
 	}
 
-	for(i=0; i<st->Xm2p2; i++)
-		if(st->sums[i]!=st->OneLine)
+	for(i=0; i<ms_Xm2p2(st); i++)
+		if(ms_sums(st)[i]!=ms_OneLine(st))
 			return MS_FALSE;
 	return MS_TRUE;
 }
