@@ -2,17 +2,17 @@
 
 void ms_init(int X, ms_origin_t org, ms_state_t *st)
 {
-	st->X=X;
-	st->Xm2=st->X*2;
-	st->Xm2p2=st->Xm2+2;
-	st->Ceilings=st->X*st->X;
+	ms_X(st)=X;
+	ms_Xm2(st)=ms_X(st)*2;
+	ms_Xm2p2(st)=ms_Xm2(st)+2;
+	ms_Ceilings(st)=ms_X(st)*ms_X(st);
 
 	if(org==MS_ORIGIN_ZERO){
 		/* \sum_{i=0}^{X^2-1}i=\frac{1}{2}X(X^2-1) */
-		st->OneLine=st->X*(st->Ceilings-1)/2;
+		ms_OneLine(st)=ms_X(st)*(ms_Ceilings(st)-1)/2;
 	}else if(org==MS_ORIGIN_ONE){
 		/* \sum_{i=1}^{X^2}i=\frac{1}{2}X(X^2+1) */
-		st->OneLine=st->X*(st->Ceilings+1)/2;
+		ms_OneLine(st)=ms_X(st)*(ms_Ceilings(st)+1)/2;
 	}
 
 	st->is_is_ms_init_called=0;
