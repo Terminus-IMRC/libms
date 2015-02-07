@@ -35,7 +35,7 @@ void ms_rotate(int *ms, ms_rotate_t rcond, ms_state_t *st)
 		case MS_ROTATE_3L:
 			for(i=0; i<ms_X(st); i++)
 				for(j=0; j<ms_X(st); j++)
-					ms_ms_tmp(st)[j*ms_X(st)+(ms_X(st)-i-1)]=ms[i*ms_X(st)+j];
+					ms_ms_tmp(st)[j*ms_X(st)+(ms_Xs1(st)-i)]=ms[i*ms_X(st)+j];
 			ms_cp(ms, ms_ms_tmp(st), st);
 			break;
 
@@ -43,7 +43,7 @@ void ms_rotate(int *ms, ms_rotate_t rcond, ms_state_t *st)
 		case MS_ROTATE_2L:
 			for(i=0; i<ms_X(st); i++)
 				for(j=0; j<ms_X(st); j++)
-					ms_ms_tmp(st)[(ms_X(st)-i-1)*ms_X(st)+(ms_X(st)-j-1)]=ms[i*ms_X(st)+j];
+					ms_ms_tmp(st)[(ms_Xs1(st)-i)*ms_X(st)+(ms_Xs1(st)-j)]=ms[i*ms_X(st)+j];
 			ms_cp(ms, ms_ms_tmp(st), st);
 			break;
 
@@ -51,14 +51,14 @@ void ms_rotate(int *ms, ms_rotate_t rcond, ms_state_t *st)
 		case MS_ROTATE_3R:
 			for(i=0; i<ms_X(st); i++)
 				for(j=0; j<ms_X(st); j++)
-					ms_ms_tmp(st)[(ms_X(st)-j-1)*ms_X(st)+i]=ms[i*ms_X(st)+j];
+					ms_ms_tmp(st)[(ms_Xs1(st)-j)*ms_X(st)+i]=ms[i*ms_X(st)+j];
 			ms_cp(ms, ms_ms_tmp(st), st);
 			break;
 
 		case MS_ROTATE_REV:
 			for(i=0; i<ms_X(st); i++)
 				for(j=0; j<ms_X(st); j++)
-					ms_ms_tmp(st)[i*ms_X(st)+(ms_X(st)-j-1)]=ms[i*ms_X(st)+j];
+					ms_ms_tmp(st)[i*ms_X(st)+(ms_Xs1(st)-j)]=ms[i*ms_X(st)+j];
 			ms_cp(ms, ms_ms_tmp(st), st);
 			break;
 
