@@ -5,6 +5,7 @@ void ms_init(int X, ms_origin_t org, ms_state_t *st)
 	ms_X(st)=X;
 	ms_Xm2(st)=ms_X(st)*2;
 	ms_Xm2p2(st)=ms_Xm2(st)+2;
+	ms_Xs1(st)=ms_X(st)-1;
 	ms_Ceilings(st)=ms_X(st)*ms_X(st);
 
 	if(org==MS_ORIGIN_ZERO){
