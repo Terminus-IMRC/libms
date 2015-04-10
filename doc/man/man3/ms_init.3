@@ -1,0 +1,33 @@
+.\" Copyright (c) 2015 Sugizaki Yukimasa.
+.TH MS_INIT 3 2015-04-10 "libms" "libms manual"
+.SH NAME
+ms_init \- initialize specified libms state
+.SH SYNOPSIS
+.B #include <libms.h>
+.sp
+.BI "void ms_init(int " X ", ms_origin_t " org ", ms_state_t *" st );
+.SH DESCRIPTION
+.BR ms_init ()
+initializes specified libms state
+.IR st .
+The number of the rows and of the columns of a square is taken from
+.I X
+and
+the origin number of a square is determined according to
+.IR org .
+.SH RETURN VALUE
+On error, this function or internal ones
+prints error messages on the standard error output
+and exits by using
+.BR exit (2)
+with
+.BR EXIT_FAILURE .
+.SH NOTES
+.BR ms_init ()
+may register a function to be called at process termination by using
+.BR atexit (3)
+to free allocated resources.
+.SH SEE ALSO
+.BR ms_finalize (3)
+.BR exit (3),
+.BR atexit (3)
