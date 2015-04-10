@@ -1,0 +1,26 @@
+.\" Copyright (c) 2015 Sugizaki Yukimasa.
+.TH MS_ALLOC 3 2015-04-10 "libms" "libms manual"
+.SH NAME
+ms_alloc \- allocate memory for a square
+.SH SYNOPSIS
+.B #include <libms.h>
+.sp
+.BI "int* ms_alloc(ms_state_t *" st );
+.SH DESCRIPTION
+.BR ms_alloc ()
+allocates memory for a square.
+The information of a square is taken from
+.IR st .
+.SH RETURN VALUE
+On success, a pointer to the allocated memory is returned.
+On error, this function
+prints error messages on the standard error output
+and exits by using
+.BR exit (3)
+with
+.BR EXIT_FAILURE .
+.SH SEE ALSO
+.BR ms_free (3),
+.BR ms_init (3),
+.BR ms_finalize (3),
+.BR exit (3)

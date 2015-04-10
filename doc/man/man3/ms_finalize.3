@@ -1,0 +1,25 @@
+.\" Copyright (c) 2015 Sugizaki Yukimasa.
+.TH MS_FINALIZE 3 2015-04-10 "libms" "libms manual"
+.SH NAME
+ms_finalize \- finalize a libms state
+.SH SYNOPSIS
+.B #include <libms.h>
+.sp
+.BI "void ms_finalize(ms_state_t *" st );
+.SH DESCRIPTION
+.BR ms_finalize ()
+finalizes a libms state
+.I st
+which is initialized by
+.BR ms_init (3).
+.SH RETURN VALUE
+On error, this function or internal ones
+prints error messages on the standard error output
+and exits by using
+.BR exit (3)
+with
+.BR EXIT_FAILURE .
+.SH SEE ALSO
+.BR ms_init (3),
+.BR exit (3),
+.BR atexit (3)

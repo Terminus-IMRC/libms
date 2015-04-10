@@ -1,0 +1,22 @@
+.\" Copyright (c) 2015 Sugizaki Yukimasa.
+.TH STR_TO_MS 3 2015-04-10 "libms" "libms manual"
+.SH NAME
+str_to_ms \- convert string into a square
+.SH SYNOPSIS
+.B #include <libms.h>
+.sp
+.BI "void str_to_ms(int *" ms ", char *" s ", ms_state_t *" st );
+.SH DESCRIPTION
+.BR str_to_ms ()
+converts string
+.I s
+into a square
+.IR ms .
+The information of a square is taken from
+.IR st .
+.SH RETURN VALUE
+None.
+.SH SEE ALSO
+.BR ms_alloc (3),
+.BR ms_init (3),
+.BR ms_finalize (3)

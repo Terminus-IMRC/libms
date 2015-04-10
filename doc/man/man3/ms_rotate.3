@@ -1,0 +1,38 @@
+.\" Copyright (c) 2015 Sugizaki Yukimasa.
+.TH MS_ROTATE 3 2015-04-10 "libms" "libms manual"
+.SH NAME
+ms_rotate \- rotates a square
+.SH SYNOPSIS
+.B #include <libms.h>
+.sp
+.BI "void ms_rotate(int *" ms ", ms_rotate_t " rcond ", ms_state_t *" st );
+.SH DESCRIPTION
+.BR ms_rotate ()
+rotates a square
+.I ms
+according to a rotate condition
+.IR rcond .
+The full list of rotate condition is as follows:
+.TP
+.B MS_ROTATE_NOP
+Do nothing.
+.TP
+.BR MS_ROTATE_R " or " MS_ROTATE_3L
+Rotates 90 degrees to the right (i.e. 270 degrees to the left).
+.TP
+.BR MS_ROTATE_2R " or " MS_ROTATE_2L
+Rotates 180 degrees to the right (i.e. 180 degrees to the left).
+.TP
+.BR MS_ROTATE_3R " or " MS_ROTATE_L
+Rotates 270 degrees to the right (i.e. 90 degrees to the left).
+.TP
+.B MS_ROTATE_REV
+Reverses.
+.PP
+The information of a square is taken from
+.IR st .
+.SH RETURN VALUE
+None.
+.SH SEE ALSO
+.BR ms_init (3),
+.BR ms_finalize (3)

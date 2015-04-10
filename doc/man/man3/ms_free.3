@@ -1,0 +1,22 @@
+.\" Copyright (c) 2015 Sugizaki Yukimasa.
+.TH MS_FREE 3 2015-04-10 "libms" "libms manual"
+.SH NAME
+ms_free \- free a square
+.SH SYNOPSIS
+.B #include <libms.h>
+.sp
+.BI "void ms_free(int *" ms ", ms_state_t *" st );
+.SH DESCRIPTION
+.BR ms_free ()
+frees a square
+.I ms
+which should have allocated by
+.BR ms_alloc (3).
+The information of a square is taken from
+.IR st .
+.SH RETURN VALUE
+None.
+.SH SEE ALSO
+.BR ms_alloc (3),
+.BR ms_init (3),
+.BR ms_finalize (3)

@@ -1,0 +1,25 @@
+.\" Copyright (c) 2015 Sugizaki Yukimasa.
+.TH MS_MOVE 3 2015-04-10 "libms" "libms manual"
+.SH NAME
+ms_move \- copy a square like
+.BR memmove (3)
+.SH SYNOPSIS
+.B #include <libms.h>
+.sp
+.BI "void ms_move(int *" ms_dst ", int *" ms_src ", ms_state_t *" st );
+.SH DESCRIPTION
+.BR ms_move ()
+copies a square
+.I ms_src
+into
+.IR ms_dst .
+The memory areas of the squares may overlap.
+The information of a square is taken from
+.IR st .
+.SH RETURN VALUE
+None.
+.SH SEE ALSO
+.BR memmove (3),
+.BR ms_cp (3),
+.BR ms_init (3),
+.BR ms_finalize (3)

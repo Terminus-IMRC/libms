@@ -1,0 +1,27 @@
+.\" Copyright (c) 2015 Sugizaki Yukimasa.
+.TH IS_MS 3 2015-04-10 "libms" "libms manual"
+.SH NAME
+is_ms \- check if a square is a magic square
+.SH SYNOPSIS
+.B #include <libms.h>
+.sp
+.BI "ms_bool_t is_ms(int *" ms ", ms_state_t *" st );
+.SH DESCRIPTION
+.BR is_ms ()
+checks if a square
+.I ms
+is a magic square.
+The information of a square is taken from
+.IR st .
+.SH RETURN VALUE
+If
+.I ms
+is a magic square,
+.B MS_TRUE
+is returned.
+Otherwise,
+.B MS_FALSE
+is returned.
+.SH SEE ALSO
+.BR ms_init (3),
+.BR ms_finalize (3)
