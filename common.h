@@ -1,5 +1,5 @@
-#ifndef __COMMON_H_INCLUDED__
-#define __COMMON_H_INCLUDED__
+#ifndef _LIBMS_COMMON_H_
+#define _LIBMS_COMMON_H_
 
 #include "libms.h"
 #include "error.h"
@@ -20,4 +20,4 @@
 #define ms_sums(stp) ((((stp))->sums))
 #define ms_ms_tmp(stp) ((((stp))->ms_tmp))
 
-#endif /* __COMMON_H_INCLUDED__ */
+#endif /* _LIBMS_COMMON_H_ */

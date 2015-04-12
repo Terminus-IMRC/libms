@@ -1,5 +1,5 @@
-#ifndef __LIBMS_H_INCLUDED__
-#define __LIBMS_H_INCLUDED__
+#ifndef _LIBMS_H_
+#define _LIBMS_H_
 
 #include <stdio.h>
 #include <string.h>
@@ -55,4 +55,4 @@
 
 #define ms_cp(ms_dst, ms_src, stp) (((void)memcpy(((ms_dst)), ((ms_src)), ms_Ceilings((stp))*sizeof(int))))
 
-#endif /* __LIBMS_H_INCLUDED__ */
+#endif /* _LIBMS_H_ */

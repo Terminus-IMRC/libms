@@ -1,8 +1,8 @@
-#ifndef __ERROR_H_INCLUDED__
-#define __ERROR_H_INCLUDED__
+#ifndef _ERROR_H_
+#define _ERROR_H_
 
 #include <stdio.h>
 
 #define error(str, ...) fprintf(stderr, "%s:%d: error: "str, __FILE__, __LINE__, ## __VA_ARGS__)
 
-#endif /* __ERROR_H_INCLUDED__ */
+#endif /* _ERROR_H_ */
