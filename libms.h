@@ -4,9 +4,14 @@
 #include <stdio.h>
 #include <string.h>
 
+	typedef enum{
+		MS_ORIGIN_ZERO, MS_ORIGIN_ONE
+	} ms_origin_t;
+
 	typedef struct{
 		int X, Ceilings, OneLine;
 		int Xm2, Xm2p2, Xs1;
+		ms_origin_t org;
 		int *sums;
 		int *ms_tmp;
 
@@ -17,10 +22,6 @@
 		_Bool is_ms_mem_basics_init_called, is_ms_mem_basics_finalize_called;
 		_Bool is_ms_rotate_init_called, is_ms_rotate_finalize_called;
 	} ms_state_t;
-
-	typedef enum{
-		MS_ORIGIN_ZERO, MS_ORIGIN_ONE
-	} ms_origin_t;
 
 	typedef enum{
 		MS_FALSE, MS_TRUE
