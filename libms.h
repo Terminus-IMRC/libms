@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdint.h>
 
 	typedef enum{
 		MS_ORIGIN_ZERO, MS_ORIGIN_ONE
@@ -12,8 +13,11 @@
 		int X, Ceilings, OneLine;
 		int Xm2, Xm2p2, Xs1;
 		ms_origin_t org;
+		int bin_elem_size;
 		int *sums;
 		int *ms_tmp;
+		int bin_buf_size;
+		uint8_t *bin_buf;
 
 		_Bool is_is_ms_init_called, is_is_ms_finalize_called;
 		_Bool is_str_to_ms_init_called, is_str_to_ms_finalize_called;
@@ -21,6 +25,7 @@
 		_Bool is_output_ms_init_called, is_output_ms_finalize_called;
 		_Bool is_ms_mem_basics_init_called, is_ms_mem_basics_finalize_called;
 		_Bool is_ms_rotate_init_called, is_ms_rotate_finalize_called;
+		_Bool is_ms_bin_init_called, is_ms_bin_finalize_called;
 	} ms_state_t;
 
 	typedef enum{
@@ -35,6 +40,30 @@
 		MS_ROTATE_REV
 	} ms_rotate_t;
 
+	typedef struct {
+		int fd;
+		int count, total;
+	} ms_bin_seq_read_t;
+
+	typedef enum {
+		MS_BIN_SEQ_READ_FLAG_NONE = 0x0,
+	} ms_bin_seq_read_flag_t;
+
+	typedef struct {
+		int fd;
+	} ms_bin_seq_write_t;
+
+	typedef enum {
+		MS_BIN_SEQ_WRITE_FLAG_NONE = 0x0,
+		MS_BIN_SEQ_WRITE_FLAG_CREAT = 0x1,
+		MS_BIN_SEQ_WRITE_FLAG_TRUNC = 0x2,
+	} ms_bin_seq_write_flag_t;
+
+	typedef enum {
+		MS_BIN_RET_NONE,
+		MS_BIN_RET_EOF,
+	} ms_bin_ret_t;
+
 	void ms_init(int X, ms_origin_t org, ms_state_t *st);
 	void ms_finalize(ms_state_t *st);
 	ms_bool_t is_ms(int *ms, ms_state_t *st);
@@ -46,6 +75,12 @@
 	void ms_move(int *ms_dst, int *ms_src, ms_state_t *st);
 	void ms_subst(int *ms, ms_state_t *st, ...);
 	void ms_rotate(int *ms, ms_rotate_t rcond, ms_state_t *st);
+	void ms_bin_seq_read_open(const char *filename, ms_bin_seq_read_flag_t flag, ms_bin_seq_read_t *mbp, ms_state_t *st);
+	void ms_bin_seq_read_close(ms_bin_seq_read_t *mbp, ms_state_t *st);
+	ms_bin_ret_t ms_bin_seq_read_next(int *ms, ms_bin_seq_read_t *mbp, ms_state_t *st);
+	void ms_bin_seq_write_open(const char *filename, ms_bin_seq_write_flag_t flag, ms_bin_seq_write_t *mbp, ms_state_t *st);
+	void ms_bin_seq_write_close(ms_bin_seq_write_t *mbp, ms_state_t *st);
+	void ms_bin_seq_write_next(int *ms, ms_bin_seq_write_t *mbp, ms_state_t *st);
 
 #define ms_X(stp) ((((stp))->X))
 #define ms_Ceilings(stp) ((((stp))->Ceilings))

@@ -16,6 +16,8 @@
 	void ms_mem_basics_finalize(ms_state_t *st);
 	void ms_rotate_init(ms_state_t *st);
 	void ms_rotate_finalize(ms_state_t *st);
+	void ms_bin_init(ms_state_t *st);
+	void ms_bin_finalize(ms_state_t *st);
 
 #define ms_sums(stp) ((((stp))->sums))
 #define ms_ms_tmp(stp) ((((stp))->ms_tmp))
