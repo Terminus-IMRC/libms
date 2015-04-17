@@ -18,8 +18,6 @@
 		int *ms_tmp;
 		int bin_buf_size;
 		uint8_t *bin_buf;
-		void (*bin_conv_b2h)(int*, void*, struct ms_state*);
-		void (*bin_conv_h2b)(void*, int*, struct ms_state*);
 
 		_Bool is_is_ms_init_called, is_is_ms_finalize_called;
 		_Bool is_str_to_ms_init_called, is_str_to_ms_finalize_called;
@@ -46,6 +44,7 @@
 	typedef struct {
 		int fd;
 		int count, total;
+		void (*bin_conv_b2h)(int*, void*, ms_state_t*);
 	} ms_bin_seq_read_t;
 
 	typedef enum {
@@ -54,6 +53,7 @@
 
 	typedef struct {
 		int fd;
+		void (*bin_conv_h2b)(void*, int*, ms_state_t*);
 	} ms_bin_seq_write_t;
 
 	typedef enum {
