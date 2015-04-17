@@ -37,6 +37,28 @@ void ms_bin_init(ms_state_t *st)
 		exit(EXIT_FAILURE);
 	}
 
+	switch (st->bin_elem_size) {
+		case 1:
+			st->bin_conv_b2h = ms_conv_bin8_to_host;
+			st->bin_conv_h2b = ms_conv_host_to_bin8;
+			break;
+		case 2:
+			st->bin_conv_b2h = ms_conv_bin16_to_host;
+			st->bin_conv_h2b = ms_conv_host_to_bin16;
+			break;
+		case 4:
+			st->bin_conv_b2h = ms_conv_bin32_to_host;
+			st->bin_conv_h2b = ms_conv_host_to_bin32;
+			break;
+		case 8:
+			st->bin_conv_b2h = ms_conv_bin64_to_host;
+			st->bin_conv_h2b = ms_conv_host_to_bin64;
+			break;
+		default:
+			error("unsupported or invalid bin_elem_size: %d\n", st->bin_elem_size);
+			exit(EXIT_FAILURE);
+	}
+
 	st->bin_buf_size = st->Ceilings * st->bin_elem_size;
 	if ((st->bin_buf = malloc(st->bin_buf_size)) == NULL) {
 		error("failed to alloc bin_buf\n");
@@ -94,7 +116,6 @@ void ms_bin_seq_read_close(ms_bin_seq_read_t *mbp, ms_state_t *st)
 
 ms_bin_ret_t ms_bin_seq_read_next(int *ms, ms_bin_seq_read_t *mbp, ms_state_t *st)
 {
-	int i;
 	int err;
 
 	if (mbp->count == mbp->total) {
@@ -107,8 +128,7 @@ ms_bin_ret_t ms_bin_seq_read_next(int *ms, ms_bin_seq_read_t *mbp, ms_state_t *s
 		exit(EXIT_FAILURE);
 	}
 
-	for (i = 0; i < st->Ceilings; i++)
-		ms[i] = st->bin_buf[i];
+	st->bin_conv_b2h(ms, st->bin_buf, st);
 
 	mbp->count++;
 
@@ -151,11 +171,9 @@ void ms_bin_seq_write_close(ms_bin_seq_write_t *mbp, ms_state_t *st)
 
 void ms_bin_seq_write_next(int *ms, ms_bin_seq_write_t *mbp, ms_state_t *st)
 {
-	int i;
 	int err;
 
-	for (i = 0; i < st->Ceilings; i++)
-		st->bin_buf[i] = ms[i];
+	st->bin_conv_h2b(st->bin_buf, ms, st);
 
 	if ((err = write(mbp->fd, st->bin_buf, st->bin_buf_size)) == -1) {
 		error("write: %s\n", strerror(errno));

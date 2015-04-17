@@ -9,7 +9,7 @@
 		MS_ORIGIN_ZERO, MS_ORIGIN_ONE
 	} ms_origin_t;
 
-	typedef struct{
+	typedef struct ms_state{
 		int X, Ceilings, OneLine;
 		int Xm2, Xm2p2, Xs1;
 		ms_origin_t org;
@@ -18,6 +18,8 @@
 		int *ms_tmp;
 		int bin_buf_size;
 		uint8_t *bin_buf;
+		void (*bin_conv_b2h)(int*, void*, struct ms_state*);
+		void (*bin_conv_h2b)(void*, int*, struct ms_state*);
 
 		_Bool is_is_ms_init_called, is_is_ms_finalize_called;
 		_Bool is_str_to_ms_init_called, is_str_to_ms_finalize_called;
@@ -26,6 +28,7 @@
 		_Bool is_ms_mem_basics_init_called, is_ms_mem_basics_finalize_called;
 		_Bool is_ms_rotate_init_called, is_ms_rotate_finalize_called;
 		_Bool is_ms_bin_init_called, is_ms_bin_finalize_called;
+		_Bool is_ms_conv_init_called, is_ms_conv_finalize_called;
 	} ms_state_t;
 
 	typedef enum{
@@ -81,6 +84,14 @@
 	void ms_bin_seq_write_open(const char *filename, ms_bin_seq_write_flag_t flag, ms_bin_seq_write_t *mbp, ms_state_t *st);
 	void ms_bin_seq_write_close(ms_bin_seq_write_t *mbp, ms_state_t *st);
 	void ms_bin_seq_write_next(int *ms, ms_bin_seq_write_t *mbp, ms_state_t *st);
+	void ms_conv_host_to_bin8(void *dst, int *src, ms_state_t *st);
+	void ms_conv_bin8_to_host(int *dst, void *src, ms_state_t *st);
+	void ms_conv_host_to_bin16(void *dst, int *src, ms_state_t *st);
+	void ms_conv_bin16_to_host(int *dst, void *src, ms_state_t *st);
+	void ms_conv_host_to_bin32(void *dst, int *src, ms_state_t *st);
+	void ms_conv_bin32_to_host(int *dst, void *src, ms_state_t *st);
+	void ms_conv_host_to_bin64(void *dst, int *src, ms_state_t *st);
+	void ms_conv_bin64_to_host(int *dst, void *src, ms_state_t *st);
 
 #define ms_X(stp) ((((stp))->X))
 #define ms_Ceilings(stp) ((((stp))->Ceilings))
