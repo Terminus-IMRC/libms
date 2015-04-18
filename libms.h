@@ -16,8 +16,6 @@
 		int bin_elem_size;
 		int *sums;
 		int *ms_tmp;
-		int bin_buf_size;
-		uint8_t *bin_buf;
 
 		_Bool is_is_ms_init_called, is_is_ms_finalize_called;
 		_Bool is_str_to_ms_init_called, is_str_to_ms_finalize_called;
@@ -41,10 +39,16 @@
 		MS_ROTATE_REV
 	} ms_rotate_t;
 
+	struct bin_buf {
+		void *addr;
+		int size;
+	};
+
 	typedef struct {
 		int fd;
 		int count, total;
 		void (*bin_conv_b2h)(int*, void*, ms_state_t*);
+		struct bin_buf buf;
 	} ms_bin_seq_read_t;
 
 	typedef enum {
@@ -54,6 +58,7 @@
 	typedef struct {
 		int fd;
 		void (*bin_conv_h2b)(void*, int*, ms_state_t*);
+		struct bin_buf buf;
 	} ms_bin_seq_write_t;
 
 	typedef enum {

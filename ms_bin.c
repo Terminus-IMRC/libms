@@ -36,12 +36,6 @@ void ms_bin_init(ms_state_t *st)
 		error("non-1-byte element size is not supported yet\n");
 		exit(EXIT_FAILURE);
 	}
-
-	st->bin_buf_size = st->Ceilings * st->bin_elem_size;
-	if ((st->bin_buf = malloc(st->bin_buf_size)) == NULL) {
-		error("failed to alloc bin_buf\n");
-		exit(EXIT_FAILURE);
-	}
 }
 
 void ms_bin_finalize(ms_state_t *st)
@@ -49,8 +43,6 @@ void ms_bin_finalize(ms_state_t *st)
 	if (st->is_ms_bin_finalize_called)
 		return;
 	st->is_ms_bin_finalize_called = !0;
-
-	free(st->bin_buf);
 }
 
 void ms_bin_seq_read_open(const char *filename, ms_bin_seq_read_flag_t flag, ms_bin_seq_read_t *mbp, ms_state_t *st)
@@ -86,23 +78,31 @@ void ms_bin_seq_read_open(const char *filename, ms_bin_seq_read_flag_t flag, ms_
 			exit(EXIT_FAILURE);
 	}
 
+	mbp->buf.size = st->Ceilings * st->bin_elem_size;
+	if ((mbp->buf.addr = malloc(mbp->buf.size)) == NULL) {
+		error("failed to alloc bin buffer\n");
+		exit(EXIT_FAILURE);
+	}
+
 	if ((err = fstat(mbp->fd, &stat_buf)) == -1) {
 		error("fstat: %s\n", strerror(errno));
 		exit(EXIT_FAILURE);
 	}
 
-	if ((stat_buf.st_size % st->bin_buf_size) != 0) {
+	if ((stat_buf.st_size % mbp->buf.size) != 0) {
 		error("incorrect file size\n");
 		exit(EXIT_FAILURE);
 	}
 
-	mbp->total = stat_buf.st_size / st->bin_buf_size;
+	mbp->total = stat_buf.st_size / mbp->buf.size;
 	mbp->count = 0;
 }
 
 void ms_bin_seq_read_close(ms_bin_seq_read_t *mbp, ms_state_t *st)
 {
 	int err;
+
+	free(mbp->buf.addr);
 
 	if ((err = close(mbp->fd)) == -1) {
 		error("close: %s\n", strerror(errno));
@@ -119,12 +119,12 @@ ms_bin_ret_t ms_bin_seq_read_next(int *ms, ms_bin_seq_read_t *mbp, ms_state_t *s
 		exit(EXIT_FAILURE);
 	}
 
-	if ((err = read(mbp->fd, st->bin_buf, st->bin_buf_size)) == -1) {
+	if ((err = read(mbp->fd, mbp->buf.addr, mbp->buf.size)) == -1) {
 		error("read: %s\n", strerror(errno));
 		exit(EXIT_FAILURE);
 	}
 
-	mbp->bin_conv_b2h(ms, st->bin_buf, st);
+	mbp->bin_conv_b2h(ms, mbp->buf.addr, st);
 
 	mbp->count++;
 
@@ -171,6 +171,12 @@ void ms_bin_seq_write_open(const char *filename, ms_bin_seq_write_flag_t flag, m
 			error("unsupported or invalid bin_elem_size: %d\n", st->bin_elem_size);
 			exit(EXIT_FAILURE);
 	}
+
+	mbp->buf.size = st->Ceilings * st->bin_elem_size;
+	if ((mbp->buf.addr = malloc(mbp->buf.size)) == NULL) {
+		error("failed to alloc bin buffer\n");
+		exit(EXIT_FAILURE);
+	}
 }
 
 void ms_bin_seq_write_close(ms_bin_seq_write_t *mbp, ms_state_t *st)
@@ -181,15 +187,17 @@ void ms_bin_seq_write_close(ms_bin_seq_write_t *mbp, ms_state_t *st)
 		error("close: %s\n", strerror(errno));
 		exit(EXIT_FAILURE);
 	}
+
+	free(mbp->buf.addr);
 }
 
 void ms_bin_seq_write_next(int *ms, ms_bin_seq_write_t *mbp, ms_state_t *st)
 {
 	int err;
 
-	mbp->bin_conv_h2b(st->bin_buf, ms, st);
+	mbp->bin_conv_h2b(mbp->buf.addr, ms, st);
 
-	if ((err = write(mbp->fd, st->bin_buf, st->bin_buf_size)) == -1) {
+	if ((err = write(mbp->fd, mbp->buf.addr, mbp->buf.size)) == -1) {
 		error("write: %s\n", strerror(errno));
 		exit(EXIT_FAILURE);
 	}
