@@ -31,11 +31,6 @@ void ms_bin_init(ms_state_t *st)
 	}
 	if ((st->org == MS_ORIGIN_ONE) && (t == 0))
 		st->bin_elem_size++;
-
-	if (st->bin_elem_size != 1) {
-		error("non-1-byte element size is not supported yet\n");
-		exit(EXIT_FAILURE);
-	}
 }
 
 void ms_bin_finalize(ms_state_t *st)
