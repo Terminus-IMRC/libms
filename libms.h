@@ -88,6 +88,7 @@
 	void ms_bin_seq_read_open(const char *filename, ms_bin_seq_read_flag_t flag, ms_bin_seq_read_t *mbp, ms_state_t *st);
 	void ms_bin_seq_read_close(ms_bin_seq_read_t *mbp, ms_state_t *st);
 	ms_bin_ret_t ms_bin_seq_read_next(int *ms, ms_bin_seq_read_t *mbp, ms_state_t *st);
+	void ms_bin_seq_read_seek(int count, int whence, ms_bin_seq_read_t *mbp, ms_state_t *st);
 	void ms_bin_seq_write_open(const char *filename, ms_bin_seq_write_flag_t flag, ms_bin_seq_write_t *mbp, ms_state_t *st);
 	void ms_bin_seq_write_close(ms_bin_seq_write_t *mbp, ms_state_t *st);
 	void ms_bin_seq_write_next(int *ms, ms_bin_seq_write_t *mbp, ms_state_t *st);

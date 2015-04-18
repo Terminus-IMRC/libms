@@ -131,6 +131,41 @@ ms_bin_ret_t ms_bin_seq_read_next(int *ms, ms_bin_seq_read_t *mbp, ms_state_t *s
 	return mbp->count == mbp->total ? MS_BIN_RET_EOF : MS_BIN_RET_NONE;
 }
 
+void ms_bin_seq_read_seek(int count, int whence, ms_bin_seq_read_t *mbp, ms_state_t *st)
+{
+	int err;
+
+	switch (whence) {
+		case SEEK_SET:
+			if (count >= mbp->total) {
+				error("too big offset count\n");
+				exit(EXIT_FAILURE);
+			}
+			mbp->count = count;
+			break;
+		case SEEK_CUR:
+			if ((mbp->count += count) >= mbp->total) {
+				error("too big offset count\n");
+				exit(EXIT_FAILURE);
+			}
+			break;
+		case SEEK_END:
+			if ((mbp->count = mbp->total -1 + count) >= mbp->total) {
+				error("too big offset count\n");
+				exit(EXIT_FAILURE);
+			}
+			break;
+		default:
+			error("unknown value for whence: %d\n", whence);
+			exit(EXIT_FAILURE);
+	}
+
+	if ((err = lseek(mbp->fd, count * st->Ceilings, whence)) == -1) {
+		error("lseek: %s\n", strerror(errno));
+		exit(EXIT_FAILURE);
+	}
+}
+
 void ms_bin_seq_write_open(const char *filename, ms_bin_seq_write_flag_t flag, ms_bin_seq_write_t *mbp, ms_state_t *st)
 {
 	int open_flag = 0;
