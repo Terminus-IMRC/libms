@@ -53,6 +53,7 @@
 
 	typedef enum {
 		MS_BIN_SEQ_READ_FLAG_NONE = 0x0,
+		MS_BIN_SEQ_READ_FLAG_HOST_WIDTH = 0x1,
 	} ms_bin_seq_read_flag_t;
 
 	typedef struct {
@@ -65,6 +66,7 @@
 		MS_BIN_SEQ_WRITE_FLAG_NONE = 0x0,
 		MS_BIN_SEQ_WRITE_FLAG_CREAT = 0x1,
 		MS_BIN_SEQ_WRITE_FLAG_TRUNC = 0x2,
+		MS_BIN_SEQ_WRITE_FLAG_HOST_WIDTH = 0x4,
 	} ms_bin_seq_write_flag_t;
 
 	typedef enum {

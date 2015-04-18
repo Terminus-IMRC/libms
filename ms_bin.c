@@ -50,6 +50,11 @@ void ms_bin_seq_read_open(const char *filename, ms_bin_seq_read_flag_t flag, ms_
 	struct stat stat_buf;
 	int err;
 
+	if (flag & MS_BIN_SEQ_READ_FLAG_HOST_WIDTH) {
+		st->bin_elem_size = sizeof(int);
+		flag ^= MS_BIN_SEQ_READ_FLAG_HOST_WIDTH;
+	}
+
 	if (flag) {
 		error("unknown bit is specified to flag\n");
 		exit(EXIT_FAILURE);
@@ -142,6 +147,10 @@ void ms_bin_seq_write_open(const char *filename, ms_bin_seq_write_flag_t flag, m
 	if (flag & MS_BIN_SEQ_WRITE_FLAG_TRUNC) {
 		open_flag |= O_TRUNC;
 		flag ^= MS_BIN_SEQ_WRITE_FLAG_TRUNC;
+	}
+	if (flag & MS_BIN_SEQ_WRITE_FLAG_HOST_WIDTH) {
+		st->bin_elem_size = sizeof(int);
+		flag ^= MS_BIN_SEQ_WRITE_FLAG_HOST_WIDTH;
 	}
 
 	if (flag) {
