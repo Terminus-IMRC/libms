@@ -71,6 +71,17 @@
 		MS_BIN_SEQ_WRITE_FLAG_HOST_WIDTH = 0x4,
 	} ms_bin_seq_write_flag_t;
 
+	typedef struct {
+		void *addr;
+		size_t size;
+	} ms_bin_map_t;
+
+	typedef enum {
+		MS_BIN_MAP_FLAG_NONE = 0x0,
+		MS_BIN_MAP_FLAG_READ = 0x1,
+		MS_BIN_MAP_FLAG_WRITE = 0x2,
+	} ms_bin_map_flag_t;
+
 	typedef enum {
 		MS_BIN_RET_NONE,
 		MS_BIN_RET_EOF,
@@ -102,6 +113,9 @@
 	void ms_conv_bin32_to_host(int *dst, void *src, ms_state_t *st);
 	void ms_conv_host_to_bin64(void *dst, int *src, ms_state_t *st);
 	void ms_conv_bin64_to_host(int *dst, void *src, ms_state_t *st);
+	void* ms_bin_map(const char *filename, ms_bin_map_flag_t flag, ms_bin_map_t *mbp, ms_state_t *st);
+	void ms_bin_unmap(ms_bin_map_t *mbp, ms_state_t *st);
+	void ms_bin_map_sync(ms_bin_map_t *mbp, ms_state_t *st);
 
 #define ms_X(stp) ((((stp))->X))
 #define ms_Ceilings(stp) ((((stp))->Ceilings))
