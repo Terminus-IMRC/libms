@@ -1,9 +1,16 @@
 #ifndef _LIBMS_H_
 #define _LIBMS_H_
 
+#ifndef _LARGEFILE64_SOURCE
 #define _LARGEFILE64_SOURCE
+#endif /* _LARGEFILE64_SOURCE */
+#ifdef _FILE_OFFSET_BITS
+#undef _FILE_OFFSET_BITS
+#endif /* _FILE_OFFSET_BITS */
 #define _FILE_OFFSET_BITS 64
+#ifndef _ISOC99_SOURCE
 #define _ISOC99_SOURCE
+#endif /* _ISOC99_SOURCE */
 
 #include <stdio.h>
 #include <string.h>
