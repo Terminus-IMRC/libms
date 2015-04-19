@@ -105,6 +105,9 @@
 	void ms_bin_seq_write_open(const char *filename, ms_bin_seq_write_flag_t flag, ms_bin_seq_write_t *mbp, ms_state_t *st);
 	void ms_bin_seq_write_close(ms_bin_seq_write_t *mbp, ms_state_t *st);
 	void ms_bin_seq_write_next(int *ms, ms_bin_seq_write_t *mbp, ms_state_t *st);
+	void* ms_bin_map(const char *filename, ms_bin_map_flag_t flag, ms_bin_map_t *mbp, ms_state_t *st);
+	void ms_bin_unmap(ms_bin_map_t *mbp, ms_state_t *st);
+	void ms_bin_map_sync(ms_bin_map_t *mbp, ms_state_t *st);
 	void ms_conv_host_to_bin8(void *dst, int *src, ms_state_t *st);
 	void ms_conv_bin8_to_host(int *dst, void *src, ms_state_t *st);
 	void ms_conv_host_to_bin16(void *dst, int *src, ms_state_t *st);
@@ -114,9 +117,6 @@
 	void ms_conv_host_to_bin64(void *dst, int *src, ms_state_t *st);
 	void ms_conv_bin64_to_host(int *dst, void *src, ms_state_t *st);
 	void ms_conv_host_to_host(int *dst, int *src, ms_state_t *st);
-	void* ms_bin_map(const char *filename, ms_bin_map_flag_t flag, ms_bin_map_t *mbp, ms_state_t *st);
-	void ms_bin_unmap(ms_bin_map_t *mbp, ms_state_t *st);
-	void ms_bin_map_sync(ms_bin_map_t *mbp, ms_state_t *st);
 
 #define ms_X(stp) ((((stp))->X))
 #define ms_Ceilings(stp) ((((stp))->Ceilings))
