@@ -1,7 +1,3 @@
-#define _LARGEFILE64_SOURCE
-#define _FILE_OFFSET_BITS 64
-#define _ISOC99_SOURCE
-
 #include "common.h"
 #include <sys/types.h>
 #include <sys/stat.h>
