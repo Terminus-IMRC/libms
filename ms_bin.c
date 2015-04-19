@@ -46,9 +46,10 @@ void ms_bin_seq_read_open(const char *filename, ms_bin_seq_read_flag_t flag, ms_
 	int err;
 
 	if (flag & MS_BIN_SEQ_READ_FLAG_HOST_WIDTH) {
-		st->bin_elem_size = sizeof(int);
+		mbp->elem_size = sizeof(int);
 		flag ^= MS_BIN_SEQ_READ_FLAG_HOST_WIDTH;
-	}
+	} else
+		mbp->elem_size = st->bin_elem_size;
 
 	if (flag) {
 		error("unknown bit is specified to flag\n");
@@ -60,7 +61,7 @@ void ms_bin_seq_read_open(const char *filename, ms_bin_seq_read_flag_t flag, ms_
 		exit(EXIT_FAILURE);
 	}
 
-	switch (st->bin_elem_size) {
+	switch (mbp->elem_size) {
 		case 1:
 			mbp->bin_conv_b2h = ms_conv_bin8_to_host;
 			break;
@@ -74,11 +75,11 @@ void ms_bin_seq_read_open(const char *filename, ms_bin_seq_read_flag_t flag, ms_
 			mbp->bin_conv_b2h = ms_conv_bin64_to_host;
 			break;
 		default:
-			error("unsupported or invalid bin_elem_size: %d\n", st->bin_elem_size);
+			error("unsupported or invalid elem_size: %d\n", mbp->elem_size);
 			exit(EXIT_FAILURE);
 	}
 
-	mbp->buf.size = st->Ceilings * st->bin_elem_size;
+	mbp->buf.size = st->Ceilings * mbp->elem_size;
 	if ((mbp->buf.addr = malloc(mbp->buf.size)) == NULL) {
 		error("failed to alloc bin buffer\n");
 		exit(EXIT_FAILURE);
@@ -179,9 +180,10 @@ void ms_bin_seq_write_open(const char *filename, ms_bin_seq_write_flag_t flag, m
 		flag ^= MS_BIN_SEQ_WRITE_FLAG_TRUNC;
 	}
 	if (flag & MS_BIN_SEQ_WRITE_FLAG_HOST_WIDTH) {
-		st->bin_elem_size = sizeof(int);
+		mbp->elem_size = sizeof(int);
 		flag ^= MS_BIN_SEQ_WRITE_FLAG_HOST_WIDTH;
-	}
+	} else
+		mbp->elem_size = st->bin_elem_size;
 
 	if (flag) {
 		error("unknown bit is specified to flag\n");
@@ -193,7 +195,7 @@ void ms_bin_seq_write_open(const char *filename, ms_bin_seq_write_flag_t flag, m
 		exit(EXIT_FAILURE);
 	}
 
-	switch (st->bin_elem_size) {
+	switch (mbp->elem_size) {
 		case 1:
 			mbp->bin_conv_h2b = ms_conv_host_to_bin8;
 			break;
@@ -207,11 +209,11 @@ void ms_bin_seq_write_open(const char *filename, ms_bin_seq_write_flag_t flag, m
 			mbp->bin_conv_h2b = ms_conv_host_to_bin64;
 			break;
 		default:
-			error("unsupported or invalid bin_elem_size: %d\n", st->bin_elem_size);
+			error("unsupported or invalid elem_size: %d\n", mbp->elem_size);
 			exit(EXIT_FAILURE);
 	}
 
-	mbp->buf.size = st->Ceilings * st->bin_elem_size;
+	mbp->buf.size = st->Ceilings * mbp->elem_size;
 	if ((mbp->buf.addr = malloc(mbp->buf.size)) == NULL) {
 		error("failed to alloc bin buffer\n");
 		exit(EXIT_FAILURE);

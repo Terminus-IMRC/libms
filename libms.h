@@ -47,6 +47,7 @@
 	typedef struct {
 		int fd;
 		int count, total;
+		int elem_size;
 		void (*bin_conv_b2h)(int*, void*, ms_state_t*);
 		struct bin_buf buf;
 	} ms_bin_seq_read_t;
@@ -58,6 +59,7 @@
 
 	typedef struct {
 		int fd;
+		int elem_size;
 		void (*bin_conv_h2b)(void*, int*, ms_state_t*);
 		struct bin_buf buf;
 	} ms_bin_seq_write_t;
