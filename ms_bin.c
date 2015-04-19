@@ -52,7 +52,7 @@ void ms_bin_seq_read_open(const char *filename, ms_bin_seq_read_flag_t flag, ms_
 		exit(EXIT_FAILURE);
 	}
 
-	if ((mbp->fd = open(filename, O_RDONLY | O_LARGEFILE)) == -1) {
+	if ((mbp->fd = open(filename, O_RDONLY)) == -1) {
 		error("open: %s: %s\n", filename, strerror(errno));
 		exit(EXIT_FAILURE);
 	}
@@ -186,7 +186,7 @@ void ms_bin_seq_write_open(const char *filename, ms_bin_seq_write_flag_t flag, m
 		exit(EXIT_FAILURE);
 	}
 
-	if ((mbp->fd = open(filename, O_WRONLY | open_flag | O_LARGEFILE, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH)) == -1) {
+	if ((mbp->fd = open(filename, O_WRONLY | open_flag, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH)) == -1) {
 		error("open: %s: %s\n", filename, strerror(errno));
 		exit(EXIT_FAILURE);
 	}
