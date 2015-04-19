@@ -128,7 +128,7 @@ ms_bin_ret_t ms_bin_seq_read_next(int *ms, ms_bin_seq_read_t *mbp, ms_state_t *s
 	return mbp->count == mbp->total ? MS_BIN_RET_EOF : MS_BIN_RET_NONE;
 }
 
-void ms_bin_seq_read_seek(int count, int whence, ms_bin_seq_read_t *mbp, ms_state_t *st)
+void ms_bin_seq_read_seek(off_t count, int whence, ms_bin_seq_read_t *mbp, ms_state_t *st)
 {
 	int err;
 
