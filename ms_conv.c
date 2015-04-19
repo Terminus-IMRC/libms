@@ -86,3 +86,8 @@ void ms_conv_bin64_to_host(int *dst, void *src, ms_state_t *st)
 	for (i = 0; i < st->Ceilings; i++)
 		dst[i] = p[i];
 }
+
+void ms_conv_host_to_host(int *dst, int *src, ms_state_t *st)
+{
+	ms_cp(dst, src, st);
+}

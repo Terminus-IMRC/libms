@@ -113,6 +113,7 @@
 	void ms_conv_bin32_to_host(int *dst, void *src, ms_state_t *st);
 	void ms_conv_host_to_bin64(void *dst, int *src, ms_state_t *st);
 	void ms_conv_bin64_to_host(int *dst, void *src, ms_state_t *st);
+	void ms_conv_host_to_host(int *dst, int *src, ms_state_t *st);
 	void* ms_bin_map(const char *filename, ms_bin_map_flag_t flag, ms_bin_map_t *mbp, ms_state_t *st);
 	void ms_bin_unmap(ms_bin_map_t *mbp, ms_state_t *st);
 	void ms_bin_map_sync(ms_bin_map_t *mbp, ms_state_t *st);
