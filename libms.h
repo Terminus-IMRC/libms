@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>
+#include <sys/types.h>
 
 	typedef enum{
 		MS_ORIGIN_ZERO, MS_ORIGIN_ONE
