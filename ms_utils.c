@@ -5,9 +5,9 @@
 
 void ms_utils_init(ms_state_t *stp)
 {
-	if (stp->is_ms_utils_init_called)
+	stp->init_and_finalize_counts.utils++;
+	if(stp->init_and_finalize_counts.utils!=1)
 		return;
-	stp->is_ms_utils_init_called = !0;
 
 	/* is_ms */
 	ms_sums(stp)=malloc(ms_Xm2p2(stp)*sizeof(int));
@@ -21,9 +21,9 @@ void ms_utils_init(ms_state_t *stp)
 
 void ms_utils_finalize(ms_state_t *stp)
 {
-	if (stp->is_ms_utils_finalize_called)
+	stp->init_and_finalize_counts.utils--;
+	if(stp->init_and_finalize_counts.utils!=0)
 		return;
-	stp->is_ms_utils_finalize_called = !0;
 
 	/* is_ms */
 	free(ms_sums(stp));

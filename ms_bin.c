@@ -15,9 +15,9 @@ void ms_bin_init(ms_state_t *st)
 {
 	int t;
 
-	if (st->is_ms_bin_init_called)
+	st->init_and_finalize_counts.bin++;
+	if(st->init_and_finalize_counts.bin!=1)
 		return;
-	st->is_ms_bin_init_called = !0;
 
 	t = st->Ceilings;
 	st->bin_elem_size = 0;
@@ -31,7 +31,7 @@ void ms_bin_init(ms_state_t *st)
 
 void ms_bin_finalize(ms_state_t *st)
 {
-	if (st->is_ms_bin_finalize_called)
+	st->init_and_finalize_counts.bin--;
+	if(st->init_and_finalize_counts.bin!=0)
 		return;
-	st->is_ms_bin_finalize_called = !0;
 }

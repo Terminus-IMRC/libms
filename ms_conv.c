@@ -3,16 +3,16 @@
 
 void ms_conv_init(ms_state_t *st)
 {
-	if (st->is_ms_conv_init_called)
+	st->init_and_finalize_counts.conv++;
+	if(st->init_and_finalize_counts.conv!=1)
 		return;
-	st->is_ms_conv_init_called = !0;
 }
 
 void ms_conv_finalize(ms_state_t *st)
 {
-	if (st->is_ms_conv_finalize_called)
+	st->init_and_finalize_counts.conv--;
+	if(st->init_and_finalize_counts.conv!=0)
 		return;
-	st->is_ms_conv_finalize_called = !0;
 }
 
 void ms_conv_host_to_bin8(void *dst, int *src, ms_state_t *st)

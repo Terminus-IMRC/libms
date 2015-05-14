@@ -29,11 +29,13 @@
 		int *sums;
 		int *ms_tmp;
 
-		_Bool is_ms_mem_basics_init_called, is_ms_mem_basics_finalize_called;
-		_Bool is_ms_rotate_init_called, is_ms_rotate_finalize_called;
-		_Bool is_ms_bin_init_called, is_ms_bin_finalize_called;
-		_Bool is_ms_conv_init_called, is_ms_conv_finalize_called;
-		_Bool is_ms_utils_init_called, is_ms_utils_finalize_called;
+		struct init_and_finalize_counts {
+			signed mem_basics;
+			signed rotate;
+			signed bin;
+			signed conv;
+			signed utils;
+		} init_and_finalize_counts;
 	} ms_state_t;
 
 	typedef enum{

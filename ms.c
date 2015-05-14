@@ -17,11 +17,11 @@ void ms_init(int X, ms_origin_t org, ms_state_t *st)
 	}
 	st->org = org;
 
-	st->is_ms_mem_basics_init_called=0;
-	st->is_ms_rotate_init_called=0;
-	st->is_ms_bin_init_called=0;
-	st->is_ms_conv_init_called=0;
-	st->is_ms_utils_init_called=0;
+	st->init_and_finalize_counts.mem_basics=0;
+	st->init_and_finalize_counts.rotate=0;
+	st->init_and_finalize_counts.bin=0;
+	st->init_and_finalize_counts.conv=0;
+	st->init_and_finalize_counts.utils=0;
 
 	ms_mem_basics_init(st);
 	ms_rotate_init(st);
@@ -34,12 +34,6 @@ void ms_init(int X, ms_origin_t org, ms_state_t *st)
 
 void ms_finalize(ms_state_t *st)
 {
-	st->is_ms_mem_basics_finalize_called=0;
-	st->is_ms_rotate_finalize_called=0;
-	st->is_ms_bin_finalize_called=0;
-	st->is_ms_conv_finalize_called=0;
-	st->is_ms_utils_finalize_called=0;
-
 	ms_mem_basics_finalize(st);
 	ms_rotate_finalize(st);
 	ms_bin_finalize(st);

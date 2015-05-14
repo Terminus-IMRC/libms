@@ -4,9 +4,9 @@
 
 void ms_mem_basics_init(ms_state_t *st)
 {
-	if(st->is_ms_mem_basics_init_called)
+	st->init_and_finalize_counts.mem_basics++;
+	if(st->init_and_finalize_counts.mem_basics!=1)
 		return;
-	st->is_ms_mem_basics_init_called=!0;
 
 	ms_ms_tmp(st)=ms_alloc(st);
 
@@ -15,9 +15,9 @@ void ms_mem_basics_init(ms_state_t *st)
 
 void ms_mem_basics_finalize(ms_state_t *st)
 {
-	if(st->is_ms_mem_basics_finalize_called)
+	st->init_and_finalize_counts.mem_basics--;
+	if(st->init_and_finalize_counts.mem_basics!=0)
 		return;
-	st->is_ms_mem_basics_finalize_called=!0;
 
 	ms_free(ms_ms_tmp(st), st);
 
