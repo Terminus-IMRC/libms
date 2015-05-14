@@ -17,46 +17,34 @@ void ms_init(int X, ms_origin_t org, ms_state_t *st)
 	}
 	st->org = org;
 
-	st->is_is_ms_init_called=0;
-	st->is_str_to_ms_init_called=0;
-	st->is_ms_state_print_info_init_called=0;
-	st->is_output_ms_init_called=0;
 	st->is_ms_mem_basics_init_called=0;
 	st->is_ms_rotate_init_called=0;
 	st->is_ms_bin_init_called=0;
 	st->is_ms_conv_init_called=0;
+	st->is_ms_utils_init_called=0;
 
-	is_ms_init(st);
-	str_to_ms_init(st);
-	ms_state_print_info_init(st);
-	output_ms_init(st);
 	ms_mem_basics_init(st);
 	ms_rotate_init(st);
 	ms_bin_init(st);
 	ms_conv_init(st);
+	ms_utils_init(st);
 
 	return;
 }
 
 void ms_finalize(ms_state_t *st)
 {
-	st->is_is_ms_finalize_called=0;
-	st->is_str_to_ms_finalize_called=0;
-	st->is_ms_state_print_info_finalize_called=0;
-	st->is_output_ms_finalize_called=0;
 	st->is_ms_mem_basics_finalize_called=0;
 	st->is_ms_rotate_finalize_called=0;
 	st->is_ms_bin_finalize_called=0;
 	st->is_ms_conv_finalize_called=0;
+	st->is_ms_utils_finalize_called=0;
 
-	is_ms_finalize(st);
-	str_to_ms_finalize(st);
-	ms_state_print_info_finalize(st);
-	output_ms_finalize(st);
 	ms_mem_basics_finalize(st);
 	ms_rotate_finalize(st);
 	ms_bin_finalize(st);
 	ms_conv_finalize(st);
+	ms_utils_finalize(st);
 
 	return;
 }
