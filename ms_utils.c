@@ -80,3 +80,15 @@ void output_ms(int *ms, FILE *fp, ms_state_t *st)
 
 	return;
 }
+
+int ms_compare(const int *ms1, const int *ms2, ms_state_t *stp)
+{
+	int i;
+
+	for (i = 0; i < ms_Ceilings(stp); i++) {
+		int d = ms1[i] - ms2[i];
+		if (d != 0)
+			return d;
+	}
+	return 0;
+}

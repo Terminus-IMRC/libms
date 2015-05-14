@@ -108,6 +108,7 @@
 	void ms_free(int *ms, ms_state_t *st);
 	void ms_move(int *ms_dst, int *ms_src, ms_state_t *st);
 	void ms_subst(int *ms, ms_state_t *st, ...);
+	int ms_compare(const int *ms1, const int *ms2, ms_state_t *stp);
 	void ms_rotate(int *ms, ms_rotate_t rcond, ms_state_t *st);
 	void ms_bin_seq_read_open(const char *filename, ms_bin_seq_read_flag_t flag, ms_bin_seq_read_t *mbp, ms_state_t *st);
 	void ms_bin_seq_read_close(ms_bin_seq_read_t *mbp, ms_state_t *st);
