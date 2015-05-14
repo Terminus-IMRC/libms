@@ -17,11 +17,11 @@
 #include <stdint.h>
 #include <sys/types.h>
 
-	typedef enum{
+	typedef enum {
 		MS_ORIGIN_ZERO, MS_ORIGIN_ONE
 	} ms_origin_t;
 
-	typedef struct ms_state{
+	typedef struct ms_state {
 		int X, Ceilings, OneLine;
 		int Xm2, Xm2p2, Xs1;
 		ms_origin_t org;
@@ -38,11 +38,11 @@
 		} init_and_finalize_counts;
 	} ms_state_t;
 
-	typedef enum{
+	typedef enum {
 		MS_FALSE, MS_TRUE
 	} ms_bool_t;
 
-	typedef enum{
+	typedef enum {
 		MS_ROTATE_NOP,
 		MS_ROTATE_R, MS_ROTATE_3L,
 		MS_ROTATE_2R, MS_ROTATE_2L,
@@ -137,6 +137,6 @@
 #define ms_Xm2p2(stp) ((((stp))->Xm2p2))
 #define ms_Xs1(stp) ((((stp))->Xs1))
 
-#define ms_cp(ms_dst, ms_src, stp) (((void)memcpy(((ms_dst)), ((ms_src)), ms_Ceilings((stp))*sizeof(int))))
+#define ms_cp(ms_dst, ms_src, stp) (((void) memcpy(((ms_dst)), ((ms_src)), ms_Ceilings((stp)) * sizeof(int))))
 
 #endif /* _LIBMS_H_ */

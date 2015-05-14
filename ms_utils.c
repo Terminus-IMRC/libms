@@ -5,13 +5,13 @@
 
 void ms_utils_init(ms_state_t *stp)
 {
-	stp->init_and_finalize_counts.utils++;
-	if(stp->init_and_finalize_counts.utils!=1)
+	stp->init_and_finalize_counts.utils ++;
+	if (stp->init_and_finalize_counts.utils != 1)
 		return;
 
 	/* is_ms */
-	ms_sums(stp)=malloc(ms_Xm2p2(stp)*sizeof(int));
-	if(ms_sums(stp)==NULL){
+	ms_sums(stp) = malloc(ms_Xm2p2(stp) * sizeof(int));
+	if (ms_sums(stp) == NULL) {
 		error("failed to malloc sums\n");
 		exit(EXIT_FAILURE);
 	}
@@ -21,8 +21,8 @@ void ms_utils_init(ms_state_t *stp)
 
 void ms_utils_finalize(ms_state_t *stp)
 {
-	stp->init_and_finalize_counts.utils--;
-	if(stp->init_and_finalize_counts.utils!=0)
+	stp->init_and_finalize_counts.utils --;
+	if (stp->init_and_finalize_counts.utils != 0)
 		return;
 
 	/* is_ms */
@@ -35,18 +35,18 @@ ms_bool_t is_ms(int *ms, ms_state_t *st)
 {
 	int i, j;
 
-	memset(ms_sums(st), 0, ms_Xm2p2(st)*sizeof(int));
-	for(i=0; i<ms_X(st); i++){
-		for(j=0; j<ms_X(st); j++){
-			ms_sums(st)[j]+=ms[j*ms_X(st)+i];
-			ms_sums(st)[1*ms_X(st)+j]+=ms[j+i*ms_X(st)];
+	memset(ms_sums(st), 0, ms_Xm2p2(st) * sizeof(int));
+	for (i = 0; i < ms_X(st); i ++) {
+		for (j = 0; j < ms_X(st); j ++){
+			ms_sums(st)[j] += ms[j * ms_X(st) + i];
+			ms_sums(st)[ms_X(st) + j] += ms[j + i * ms_X(st)];
 		}
-		ms_sums(st)[ms_Xm2(st)+0]+=ms[i+i*ms_X(st)];
-		ms_sums(st)[ms_Xm2(st)+1]+=ms[(ms_X(st)-1-i)+i*ms_X(st)];
+		ms_sums(st)[ms_Xm2(st) + 0] += ms[i + i * ms_X(st)];
+		ms_sums(st)[ms_Xm2(st) + 1] += ms[(ms_X(st) - 1 - i) + i * ms_X(st)];
 	}
 
-	for(i=0; i<ms_Xm2p2(st); i++)
-		if(ms_sums(st)[i]!=ms_OneLine(st))
+	for (i = 0; i < ms_Xm2p2(st); i ++)
+		if (ms_sums(st)[i] != ms_OneLine(st))
 			return MS_FALSE;
 	return MS_TRUE;
 }
@@ -55,8 +55,8 @@ void str_to_ms(int *ms, char *s, ms_state_t *st)
 {
 	int i;
 
-	for(i=0; i<ms_Ceilings(st); i++)
-		ms[i]=(int)strtol(s, &s, 10);
+	for (i = 0; i < ms_Ceilings(st); i ++)
+		ms[i] = (int) strtol(s, &s, 10);
 	
 	return;
 }
@@ -75,8 +75,8 @@ void output_ms(int *ms, FILE *fp, ms_state_t *st)
 {
 	int i;
 
-	for(i=0; i<ms_Ceilings(st); i++)
-		fprintf(fp, "%d%c", ms[i], i!=ms_Ceilings(st)-1?' ':'\n');
+	for (i = 0; i < ms_Ceilings(st); i ++)
+		fprintf(fp, "%d%c", ms[i], i != ms_Ceilings(st) - 1 ? ' ' : '\n');
 
 	return;
 }
