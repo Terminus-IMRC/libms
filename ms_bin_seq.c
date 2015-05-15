@@ -153,7 +153,7 @@ void ms_bin_seq_read_seek(off_t count, int whence, ms_bin_seq_read_t *mbp, ms_st
 			exit(EXIT_FAILURE);
 	}
 
-	if ((err = lseek(mbp->fd, count * st->Ceilings, whence)) == -1) {
+	if ((err = lseek(mbp->fd, count * mbp->buf.size, whence)) == -1) {
 		error("lseek: %s\n", strerror(errno));
 		exit(EXIT_FAILURE);
 	}
