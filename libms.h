@@ -53,6 +53,8 @@
 	struct bin_buf {
 		void *addr;
 		int size;
+		int bufsize;
+		size_t nmemb, read;
 	};
 
 	typedef struct {
@@ -112,6 +114,7 @@
 	void ms_rotate(int *ms, ms_rotate_t rcond, ms_state_t *st);
 	void ms_bin_seq_read_open(const char *filename, ms_bin_seq_read_flag_t flag, ms_bin_seq_read_t *mbp, ms_state_t *st);
 	void ms_bin_seq_read_close(ms_bin_seq_read_t *mbp, ms_state_t *st);
+	void ms_bin_seq_read_set_buffer(size_t nmemb, ms_bin_seq_read_t *mbp, ms_state_t *st);
 	ms_bin_ret_t ms_bin_seq_read_next(int *ms, ms_bin_seq_read_t *mbp, ms_state_t *st);
 	void ms_bin_seq_read_seek(off_t count, int whence, ms_bin_seq_read_t *mbp, ms_state_t *st);
 	void ms_bin_seq_write_open(const char *filename, ms_bin_seq_write_flag_t flag, ms_bin_seq_write_t *mbp, ms_state_t *st);

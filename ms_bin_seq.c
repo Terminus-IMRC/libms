@@ -50,11 +50,8 @@ void ms_bin_seq_read_open(const char *filename, ms_bin_seq_read_flag_t flag, ms_
 			exit(EXIT_FAILURE);
 	}
 
-	mbp->buf.size = st->Ceilings * mbp->elem_size;
-	if ((mbp->buf.addr = malloc(mbp->buf.size)) == NULL) {
-		error("failed to alloc bin buffer\n");
-		exit(EXIT_FAILURE);
-	}
+	mbp->buf.addr = NULL;
+	ms_bin_seq_read_set_buffer(1, mbp, st);
 
 	if ((err = fstat(mbp->fd, &stat_buf)) == -1) {
 		error("fstat: %s\n", strerror(errno));
@@ -82,6 +79,26 @@ void ms_bin_seq_read_close(ms_bin_seq_read_t *mbp, ms_state_t *st)
 	}
 }
 
+void ms_bin_seq_read_set_buffer(size_t nmemb, ms_bin_seq_read_t *mbp, ms_state_t *st)
+{
+	if (nmemb <= 0) {
+		error("nmemb must be greater than 0\n");
+		exit(EXIT_FAILURE);
+	}
+
+	if (mbp->buf.addr != NULL)
+		free(mbp->buf.addr);
+
+	mbp->buf.nmemb = nmemb;
+	mbp->buf.size = st->Ceilings * mbp->elem_size;
+	mbp->buf.bufsize = mbp->buf.nmemb * mbp->buf.size;
+	if ((mbp->buf.addr = malloc(mbp->buf.bufsize)) == NULL) {
+		error("failed to alloc bin buffer\n");
+		exit(EXIT_FAILURE);
+	}
+	mbp->buf.read = mbp->buf.nmemb;
+}
+
 ms_bin_ret_t ms_bin_seq_read_next(int *ms, ms_bin_seq_read_t *mbp, ms_state_t *st)
 {
 	int err;
@@ -91,14 +108,18 @@ ms_bin_ret_t ms_bin_seq_read_next(int *ms, ms_bin_seq_read_t *mbp, ms_state_t *s
 		exit(EXIT_FAILURE);
 	}
 
-	if ((err = read(mbp->fd, mbp->buf.addr, mbp->buf.size)) == -1) {
-		error("read: %s\n", strerror(errno));
-		exit(EXIT_FAILURE);
+	if (mbp->buf.read == mbp->buf.nmemb) {
+		if ((err = read(mbp->fd, mbp->buf.addr, mbp->buf.bufsize)) == -1) {
+			error("read: %s\n", strerror(errno));
+			exit(EXIT_FAILURE);
+		}
+		mbp->buf.read = 0;
 	}
 
-	mbp->bin_conv_b2h(ms, mbp->buf.addr, st);
+	mbp->bin_conv_b2h(ms, ((uint8_t*) mbp->buf.addr) + mbp->buf.read * mbp->buf.size, st);
 
 	mbp->count++;
+	mbp->buf.read++;
 
 	return mbp->count == mbp->total ? MS_BIN_RET_EOF : MS_BIN_RET_NONE;
 }
@@ -136,6 +157,7 @@ void ms_bin_seq_read_seek(off_t count, int whence, ms_bin_seq_read_t *mbp, ms_st
 		error("lseek: %s\n", strerror(errno));
 		exit(EXIT_FAILURE);
 	}
+	mbp->buf.read = mbp->buf.nmemb;
 }
 
 void ms_bin_seq_write_open(const char *filename, ms_bin_seq_write_flag_t flag, ms_bin_seq_write_t *mbp, ms_state_t *st)
