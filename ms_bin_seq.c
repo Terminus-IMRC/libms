@@ -96,7 +96,7 @@ void ms_bin_seq_read_set_buffer(size_t nmemb, ms_bin_seq_read_t *mbp, ms_state_t
 		error("failed to alloc bin buffer\n");
 		exit(EXIT_FAILURE);
 	}
-	mbp->buf.read = mbp->buf.nmemb;
+	mbp->buf.nmemb_done = mbp->buf.nmemb;
 }
 
 ms_bin_ret_t ms_bin_seq_read_next(int *ms, ms_bin_seq_read_t *mbp, ms_state_t *st)
@@ -108,18 +108,18 @@ ms_bin_ret_t ms_bin_seq_read_next(int *ms, ms_bin_seq_read_t *mbp, ms_state_t *s
 		exit(EXIT_FAILURE);
 	}
 
-	if (mbp->buf.read == mbp->buf.nmemb) {
+	if (mbp->buf.nmemb_done == mbp->buf.nmemb) {
 		if ((err = read(mbp->fd, mbp->buf.addr, mbp->buf.bufsize)) == -1) {
 			error("read: %s\n", strerror(errno));
 			exit(EXIT_FAILURE);
 		}
-		mbp->buf.read = 0;
+		mbp->buf.nmemb_done = 0;
 	}
 
-	mbp->bin_conv_b2h(ms, ((uint8_t*) mbp->buf.addr) + mbp->buf.read * mbp->buf.size, st);
+	mbp->bin_conv_b2h(ms, ((uint8_t*) mbp->buf.addr) + mbp->buf.nmemb_done * mbp->buf.size, st);
 
 	mbp->count++;
-	mbp->buf.read++;
+	mbp->buf.nmemb_done++;
 
 	return mbp->count == mbp->total ? MS_BIN_RET_EOF : MS_BIN_RET_NONE;
 }
@@ -157,7 +157,7 @@ void ms_bin_seq_read_seek(off_t count, int whence, ms_bin_seq_read_t *mbp, ms_st
 		error("lseek: %s\n", strerror(errno));
 		exit(EXIT_FAILURE);
 	}
-	mbp->buf.read = mbp->buf.nmemb;
+	mbp->buf.nmemb_done = mbp->buf.nmemb;
 }
 
 void ms_bin_seq_write_open(const char *filename, ms_bin_seq_write_flag_t flag, ms_bin_seq_write_t *mbp, ms_state_t *st)

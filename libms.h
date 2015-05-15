@@ -54,7 +54,7 @@
 		void *addr;
 		int size;
 		int bufsize;
-		size_t nmemb, read;
+		size_t nmemb, nmemb_done;
 	};
 
 	typedef struct {
