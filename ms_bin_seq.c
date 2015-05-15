@@ -143,7 +143,7 @@ void ms_bin_seq_read_seek(off_t count, int whence, ms_bin_seq_read_t *mbp, ms_st
 			}
 			break;
 		case SEEK_END:
-			if ((mbp->count = mbp->total - 1 + count) >= mbp->total) {
+			if ((mbp->count = mbp->total + count) >= mbp->total) {
 				error("too big offset count\n");
 				exit(EXIT_FAILURE);
 			}
