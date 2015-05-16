@@ -61,6 +61,21 @@ void str_to_ms(int *ms, char *s, ms_state_t *st)
 	return;
 }
 
+void ms_to_str(char *s, const int *ms, ms_state_t *st)
+{
+	int i;
+	char buf[0x100];
+
+	s[0] = '\0';
+
+	for (i = 0; i < ms_Ceilings(st); i ++) {
+		sprintf(buf, "%d", ms[i]);
+		strcat(s, buf);
+		if (i != ms_Ceilings(st) - 1)
+			strcat(s, " ");
+	}
+}
+
 void ms_state_print_info(ms_state_t *st)
 {
 	printf("X: %d\n", ms_X(st));

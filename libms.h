@@ -104,6 +104,7 @@
 	void ms_finalize(ms_state_t *st);
 	ms_bool_t is_ms(int *ms, ms_state_t *st);
 	void str_to_ms(int *ms, char *s, ms_state_t *st);
+	void ms_to_str(char *s, const int *ms, ms_state_t *st);
 	void ms_state_print_info(ms_state_t *st);
 	void output_ms(int *ms, FILE *fp, ms_state_t *st);
 	int* ms_alloc(ms_state_t *st);
