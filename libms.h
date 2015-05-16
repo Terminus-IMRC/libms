@@ -120,7 +120,9 @@
 	void ms_bin_seq_read_seek(off_t count, int whence, ms_bin_seq_read_t *mbp, ms_state_t *st);
 	void ms_bin_seq_write_open(const char *filename, ms_bin_seq_write_flag_t flag, ms_bin_seq_write_t *mbp, ms_state_t *st);
 	void ms_bin_seq_write_close(ms_bin_seq_write_t *mbp, ms_state_t *st);
+	void ms_bin_seq_write_set_buffer(size_t nmemb, ms_bin_seq_write_t *mbp, ms_state_t *st);
 	void ms_bin_seq_write_next(int *ms, ms_bin_seq_write_t *mbp, ms_state_t *st);
+	void ms_bin_seq_write_flush(ms_bin_seq_write_t *mbp, ms_state_t *st);
 	void* ms_bin_map(const char *filename, ms_bin_map_flag_t flag, ms_bin_map_t *mbp, ms_state_t *st);
 	void ms_bin_unmap(ms_bin_map_t *mbp, ms_state_t *st);
 	void ms_bin_map_sync(ms_bin_map_t *mbp, ms_state_t *st);
