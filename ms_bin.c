@@ -1,15 +1,4 @@
 #include "common.h"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <sys/mman.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdint.h>
-#include <math.h>
-#include <errno.h>
 
 void ms_bin_init(ms_state_t *st)
 {
