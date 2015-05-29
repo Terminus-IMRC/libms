@@ -3,7 +3,7 @@ SRCS:=ms.c ms_mem_basics.c ms_rotate.c ms_bin.c ms_bin_seq.c ms_bin_map.c ms_con
 OBJS:=$(SRCS:%.c=%.c.o)
 DEPS:=$(SRCS:%.c=%.c.d)
 ALLDEPS=$(MAKEFILE_LIST_SANS_DEPS)
-CFLAGS:=-Wall -Wextra -Wno-unused-parameter -O2
+CFLAGS:=-Wall -Wextra -Wno-unused-parameter -O2 -g
 
 CC:=gcc
 AR:=ar
