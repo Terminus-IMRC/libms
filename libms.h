@@ -35,6 +35,7 @@
 			signed bin;
 			signed conv;
 			signed utils;
+			signed counters;
 		} init_and_finalize_counts;
 	} ms_state_t;
 
@@ -95,6 +96,10 @@
 		MS_BIN_MAP_FLAG_WRITE = 0x2,
 	} ms_bin_map_flag_t;
 
+	typedef struct {
+		int start, step, end;
+	} ms_counters_t;
+
 	typedef enum {
 		MS_BIN_RET_NONE,
 		MS_BIN_RET_EOF,
@@ -135,6 +140,10 @@
 	void ms_conv_host_to_bin64(void *dst, int *src, ms_state_t *st);
 	void ms_conv_bin64_to_host(int *dst, void *src, ms_state_t *st);
 	void ms_conv_host_to_host(int *dst, int *src, ms_state_t *st);
+	void ms_counters(ms_counters_t *counters, const int lc, ms_state_t *stp);
+	int MS_LINE_VERT(const int l, ms_state_t *stp);
+	int MS_LINE_HORIZ(const int l, ms_state_t *stp);
+	int MS_LINE_DIAG(const int l, ms_state_t *stp);
 
 #define ms_X(stp) ((((stp))->X))
 #define ms_Ceilings(stp) ((((stp))->Ceilings))

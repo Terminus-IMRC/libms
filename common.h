@@ -14,6 +14,8 @@
 	void ms_conv_finalize(ms_state_t *st);
 	void ms_utils_init(ms_state_t *st);
 	void ms_utils_finalize(ms_state_t *st);
+	void ms_counters_init(ms_state_t *stp);
+	void ms_counters_finalize(ms_state_t *stp);
 
 #define ms_sums(stp) ((((stp))->sums))
 #define ms_ms_tmp(stp) ((((stp))->ms_tmp))

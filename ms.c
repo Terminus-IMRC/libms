@@ -22,12 +22,14 @@ void ms_init(int X, ms_origin_t org, ms_state_t *st)
 	st->init_and_finalize_counts.bin = 0;
 	st->init_and_finalize_counts.conv = 0;
 	st->init_and_finalize_counts.utils = 0;
+	st->init_and_finalize_counts.counters = 0;
 
 	ms_mem_basics_init(st);
 	ms_rotate_init(st);
 	ms_bin_init(st);
 	ms_conv_init(st);
 	ms_utils_init(st);
+	ms_counters_init(st);
 
 	return;
 }
@@ -39,6 +41,7 @@ void ms_finalize(ms_state_t *st)
 	ms_bin_finalize(st);
 	ms_conv_finalize(st);
 	ms_utils_finalize(st);
+	ms_counters_finalize(st);
 
 	return;
 }
